@@ -1,0 +1,761 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html> <head>
+	<title> Chris&#39;s Wiki :: blog/latest/10 </title>
+	<link href="./dwiki.css" rel="stylesheet" type="text/css"> 
+	<meta name="viewport" content="width=device-width">
+	<link rel="alternate" type="application/atom+xml" href="/~cks/space/blog/latest/10/?atom">
+	 <meta name="robots" content="noindex">
+</head>
+<body>
+<div id="header">
+	<div class="left"><a href="/~cks/">Chris Siebenmann</a> ::
+<span class="breadcrumbs"><a href="/~cks/space/">CSpace</a> &raquo;
+       <a href="/~cks/space/blog/">blog</a> &raquo;
+       <a href="/~cks/space/blog/latest/">latest</a> &raquo;
+       10</span></div>
+	<div class="right">Welcome, guest.</div>
+</div>
+
+<div id="documentbody">
+<h1 class="wttitle"> <a href="/~cks/space/blog/">Wandering Thoughts</a> archives <!-- latest/10 --> </h1>
+<div class="wtblog">
+<div class="maintext"> 
+	<p class="daymarker" align=center><b>2025-07-28</b></p>
+<div class="blogentry">
+<div class="entryid"> <h2> <a href="/~cks/space/blog/unix/V7GaveUsEnvironmentVariables">V7GaveUsEnvironmentVariables</a> </h2> </div>
+<div class="wikitext"><h2>Another thing V7 Unix gave us is environment variables</h2>
+
+<p>Simon Tatham <a href="https://hachyderm.io/@simontatham/114930798039492914">recently wondered "Why is PATH called PATH?"</a>. This made
+me wonder the closely related question of when environment variables
+appeared in Unix, and the answer is that <strong>the environment and
+environment variables appeared in V7 Unix</strong> as another of the things
+that <a href="/~cks/space/blog/unix/V7WhyItMattersSoMuch">made it so important to Unix history</a>
+(<a href="/~cks/space/blog/unix/RemarkableV7">also</a>).</p>
+
+<p>Up through V6, the exec system call and family of system calls took
+two arguments, the path and the argument list; we can see this in
+both the V6 <a href="https://www.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man2/exec.2"><code>exec(2)</code> manual page</a> and
+<a href="https://www.tuhs.org/cgi-bin/utree.pl?file=V6/usr/sys/ken/sys1.c">the implementation of the system call in the kernel</a>.  As
+bonus trivia, it appears that the V6 exec() limited you to 510
+characters of arguments (and probably V1 through V5 had a similarly
+low limit, but I haven't looked at their kernel code).</p>
+
+<p>In V7, <a href="https://www.tuhs.org/cgi-bin/utree.pl?file=V7/usr/man/man2/exec.2">the <code>exec(2)</code> manual page</a> now
+documents a possible third argument, and <a href="https://www.tuhs.org/cgi-bin/utree.pl?file=V7/usr/sys/sys/sys1.c">the kernel implementation
+is much more complex</a>, plus
+there's <a href="https://www.tuhs.org/cgi-bin/utree.pl?file=V7/usr/man/man5/environ.5">an <code>environ(5)</code> manual page about it</a>.
+Based on <a href="https://www.tuhs.org/cgi-bin/utree.pl?file=V7/usr/sys/h/param.h">h/param.h</a>, V7
+also had a much higher size limit on the combined sized of arguments
+and environment variables, which isn't all that surprising given
+the addition of the environment. Commands like <a href="https://www.tuhs.org/cgi-bin/utree.pl?file=V7/usr/src/cmd/login.c">login.c</a> were
+updated to put some things into the new environment; login sets a
+default $PATH and a $HOME, for example, and <a href="https://www.tuhs.org/cgi-bin/utree.pl?file=V7/usr/man/man5/environ.5"><code>environ(5)</code></a>
+documents various other uses (which I haven't checked in the source
+code).</p>
+
+<p>This implies that the V7 shell is where $PATH first appeared in
+Unix, where <a href="https://www.tuhs.org/cgi-bin/utree.pl?file=V7/usr/man/man1/sh.1">the manual page</a>
+describes it as 'the search path for commands'. This might make you
+wonder how <a href="https://www.tuhs.org/cgi-bin/utree.pl?file=V6/usr/source/s2/sh.c">the V6 shell</a> handled
+locating commands, and where it looked for them. The details are
+helpfully documented in <a href="https://www.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man1/sh.1">the V6 shell manual page</a>,
+and I'll just quote what it has to say:</p>
+
+<blockquote><p>If the first argument is the name of an executable file, it is
+invoked; otherwise the string `/bin/' is prepended to the argument.
+(In this way most standard commands, which reside in `/bin', are
+found.) If no such command is found, the string `/usr' is further
+prepended (to give `/usr/bin/command') and another attempt is made to
+execute the resulting file. (Certain lesser-used commands live in
+`/usr/bin'.)</p>
+</blockquote>
+
+<p>('Invoked' here is carrying some extra freight, since this may not
+involve a direct kernel exec of the file. An executable file that
+the kernel didn't like would be directly run by the shell.)</p>
+
+<p>I suspect that '$PATH' was given such as short name (instead of a
+longer, more explicit one) simply as a matter of Unix style at the
+time. Pretty much everything in V7 was terse and short in this style
+for various reasons, and verbose environment variable names would
+have reduced that limited exec argument space.</p>
+</div><div class="commenttools">(<a href="/~cks/space/blog/unix/V7GaveUsEnvironmentVariables?showcomments#comments">2 comments</a>.)</div>
+<small><a href="/~cks/space/blog/unix/V7GaveUsEnvironmentVariables">unix/V7GaveUsEnvironmentVariables</a> written at 22:38:20; <a href="/~cks/space/blog/unix/V7GaveUsEnvironmentVariables?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<p> </p>
+<p class="daymarker" align=center><b>2025-07-27</b></p>
+<div class="blogentry">
+<div class="entryid"> <h2> <a href="/~cks/space/blog/python/ArgparseVariableArgumentCount">ArgparseVariableArgumentCount</a> </h2> </div>
+<div class="wikitext"><h2>Python argparse and the minor problem of a variable valid argument count</h2>
+
+<p><a href="https://docs.python.org/3/library/argparse.html">Argparse</a> is the
+standard Python module for handling arguments to command line
+programs, and because for small programs, Python makes using things
+outside the standard library quite annoying, it's the one I use in
+my Python based utility programs. Recently I found myself dealing
+with a little problem where <a href="https://docs.python.org/3/library/argparse.html">argparse</a> doesn't have a
+good answer, partly because <a href="/~cks/space/blog/python/ArgparseAndNestedGroups">you can't nest argument groups</a>.</p>
+
+<p>Suppose, not hypothetically, that you have a program that can
+properly take zero, two, or three command line arguments (which are
+separate from options), and the command line arguments are of
+different types (the first is a string and the second two are
+numbers). Argparse makes it easy to handle having either two or
+three arguments, no more and no less; the first two arguments have
+no <a href="https://docs.python.org/3/library/argparse.html#nargs"><code>nargs</code></a>
+set, and then the third sets '<code>nargs="?"</code>'. However, as far as I
+can see argparse has no direct support for handling the zero-argument
+case, or rather for forbidding the one-argument one.</p>
+
+<p>(If the first two arguments were of the same type we could easily
+gather them together into a two-element list with '<code>nargs=2</code>', but
+they aren't, so we'd have to tell argparse that both are strings
+and then try the 'string to int' conversion of the second argument
+ourselves, losing argparse's handling of it.)</p>
+
+<p>If you set all three arguments to '<code>nargs="?"</code>' and give them usable
+default values, you can accept zero, two, or three arguments, and
+things will work if you supply only one argument (because the second
+argument will have a usable default). This is the solution I've
+adopted for my particular program because I'm not stubborn enough
+to try to roll my own validation on top of argparse, not for a
+little personal tool.</p>
+
+<p>If argparse supported nested groups for arguments, you could
+potentially make a mutually exclusive argument group that contained
+two sub-groups, one with nothing in it and one that handled the two
+and three argument case. This would require argparse not only to
+support nested groups but to support empty nested groups (and not
+ignore them), which is at least a little bit tricky.</p>
+
+<p>Alternately, argparse could support a global specification of what
+numbers of arguments are valid. Or it could support a 'validation'
+callback that is called with information about what argparse detected
+and which could signal errors to argparse that argparse handled in
+its standard way, giving you uniform argument validation and error
+text and so on.</p>
+</div>
+<small><a href="/~cks/space/blog/python/ArgparseVariableArgumentCount">python/ArgparseVariableArgumentCount</a> written at 23:30:17; <a href="/~cks/space/blog/python/ArgparseVariableArgumentCount?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<p> </p>
+<p class="daymarker" align=center><b>2025-07-26</b></p>
+<div class="blogentry">
+<div class="entryid"> <h2> <a href="/~cks/space/blog/unix/UnixHadToEvolve">UnixHadToEvolve</a> </h2> </div>
+<div class="wikitext"><h2>Unix had good reasons to evolve since V7 (and had to)</h2>
+
+<p>There's a certain sort of person who feels that the platonic ideal
+of Unix is somewhere around Research Unix V7 and it's almost all
+been downhill since then (perhaps with the exception of further
+Research Unixes and then Plan 9, although very few people got their
+hands on any of them). For all that I like Unix and started using
+it long ago when it was simpler (although not as far back as V7),
+I reject this view and think it's completely mistaken.</p>
+
+<p>V7 Unix was simple but it was also limited, both in its implementation
+(which often <a href="/~cks/space/blog/unix/BufferedIOBeforeMalloc">took shortcuts</a> (<a href="/~cks/space/blog/unix/SignalsHowOld">also</a>, <a href="/~cks/space/blog/unix/TwoFileDescriptorLimits">also</a>, <a href="/~cks/space/blog/unix/FilesystemStatDeviceProblem">also</a>) and in its overall features (<a href="/~cks/space/blog/unix/UnixEarlyFilenameLengths">such
+as short filenames</a>).  Obviously V7 didn't
+have networking, but even things that most people think of as
+perfectly reasonable and good Unix features like <a href="/~cks/space/blog/unix/ExecAndShebangHistory">'#!' support for
+shell scripts in the kernel</a> and <a href="/~cks/space/blog/unix/NewgrpCommandWhy">processes
+being in multiple groups at once</a>. That V7 was
+a simple and limited system meant that its choices were to grow to
+meet people's quite reasonable needs or to fall out of use.</p>
+
+<p>(Some of these needs were for features and some of them were for
+performance. The original V7 filesystem was quite simple but also
+suffered from performance issues, ones that often got worse over
+time.)</p>
+
+<p>I'll agree that the path that the growth of Unix has taken since
+V7 is not necessarily ideal; we can all point to various things
+about modern Unixes that we don't like. Any particular flaws came
+about partly because people don't necessarily make ideal decisions
+and partly because we haven't necessarily had perfect understandings
+of the problems when people had to do something, and then once
+they'd done something they were constrained by backward compatibility.</p>
+
+<p>(In some ways Plan 9 represents 'Unix without the constraint of
+backward compatibility', and while I think there are a variety of
+reasons that it failed to catch on in the world, that lack of
+compatibility is one of them. Even if you had access to Plan 9, you
+had to be fairly dedicated to do your work in a Plan 9 environment
+(and that was before the web made it worse).)</p>
+
+<p>PS: It's my view that the people who are pushing various Unixes
+forward aren't incompetent, stupid, or foolish. They're rational
+and talented people who are doing their best in the circumstances
+that they find themselves. If you want to throw stones, don't throw
+them at the people, throw them at the overall environment that
+constrains and shapes how everything in this world is pushed to
+evolve. Unix is far from the only thing shaped in potentially
+undesirable ways by these forces; consider, for example, C++.</p>
+
+<p>(It's also clear that a lot of people involved in the historical
+evolution of BSD and other Unixes were really quite smart, even if
+you don't like, for example, the BSD sockets API.)</p>
+</div><div class="commenttools">(<a href="/~cks/space/blog/unix/UnixHadToEvolve?showcomments#comments">One comment</a>.)</div>
+<small><a href="/~cks/space/blog/unix/UnixHadToEvolve">unix/UnixHadToEvolve</a> written at 23:21:55; <a href="/~cks/space/blog/unix/UnixHadToEvolve?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<p> </p>
+<p class="daymarker" align=center><b>2025-07-25</b></p>
+<div class="blogentry">
+<div class="entryid"> <h2> <a href="/~cks/space/blog/programming/EmacsForcingNoDeiconification">EmacsForcingNoDeiconification</a> </h2> </div>
+<div class="wikitext"><h2>Mostly stopping GNU Emacs from de-iconifying itself when it feels like it</h2>
+
+<p>Over on the Fediverse <a href="https://mastodon.social/@cks/114902910719483684">I had a long standing GNU Emacs gripe</a>:</p>
+
+<blockquote><p>I would rather like to make it so that GNU Emacs never un-iconifies
+itself when it completes (Lisp-level) actions. If I have Emacs
+iconified I want it to stay that way, not suddenly appear under my
+mouse cursor like an extremely large modal popup. (Modal popups suck,
+they are a relic of single-tasking windowing environments.)</p>
+</blockquote>
+
+<p>For those of you who use GNU Emacs and have never been unlucky
+enough to experience this, if you start some long operation in GNU
+Emacs and then decide to iconify it to get it out of your face, a
+lot of the time GNU Emacs will abruptly pop itself back open when
+it finishes, generally with completely unpredictable timing so that
+it disrupts whatever else you switched to in the mean time.</p>
+
+<p>(This only happens in some X environments. In others, the desktop
+or window manager ignores what Emacs is trying to do and leaves it
+minimized in your taskbar.)</p>
+
+<p>To cut straight to the answer, you can avoid a lot of this with
+the following snippet of Emacs Lisp:</p>
+
+
+<blockquote><pre style="white-space: pre-wrap;">
+(add-to-list 'display-buffer-alist '(t nil (inhibit-switch-frame . t)))
+</pre>
+</blockquote>
+
+<p>I believe that this has some side effects but that these side effects
+will generally be that Emacs doesn't yank around your mouse focus
+or suddenly raise windows to be on top of everything.</p>
+
+<p>GNU Emacs doesn't have a specific function that it calls to de-iconify
+a <em>frame</em>, what Emacs calls a top level window. Instead, the
+deiconification happens in C code inside C-level functions like
+<code>raise-frame</code> and <code>make-frame-visible</code>, which also do other things
+and which are called from many places. For instance, one of
+<code>make-frame-visible</code>'s jobs is actually displaying the frame's X
+level window if it doesn't already exist on the screen.</p>
+
+<p>(There's an <code>iconify-or-deiconify-frame</code> function but if you look
+that's a Lisp function that calls <code>make-frame-visible</code>. It's only
+used a little bit in the Emacs Lisp code base.)</p>
+
+<p>A determined person could probably hook these C-level functions
+through <a href="/~cks/space/blog/programming/EmacsChangingLispWithAdviceAdd"><code>advice-add</code></a> to make
+them do nothing if they were called on an existing, mapped frame
+that was just iconified. That would be the elegant way to do what
+I want.  The inelegant way is to discover, via use of <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Debugging.html">the Emacs
+Lisp debugger</a>,
+that everything I seem to care about is going through <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Displaying-Buffers.html">'<code>display-buffer</code>'</a>
+(eventually calling <code>window--maybe-raise-frame</code>), and that
+<a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Display-Action-Alists.html">display-buffer's behavior can be customized</a>
+to not 'switch frames', which will wind up causing things to not
+call window--maybe-raise-frame and not de-iconify GNU Emacs windows
+on me.</p>
+
+<p>To understand <code>display-buffer-alist</code> I relied on <a href="https://www.masteringemacs.org/article/demystifying-emacs-window-manager">Demystifying
+Emacs’s Window Manager</a>.
+My addition to display-buffer-alist has three elements:</p>
+
+<ul><li>the <code>t</code> tells <code>display-buffer</code> to always use this alist entry.</li>
+<li>the <code>nil</code> tells <code>display-buffer</code> that I don't have any special action
+functions I want to use here and it should just use its regular ones.
+I think an empty list might be more proper here, but <code>nil</code> works.</li>
+<li>the '<code>(inhibit-switch-frame . t)</code>' sets the important customization,
+which will be merged with any other things set by other (matching)
+alist entries.</li>
+</ul>
+
+<p>The net effect is that '<code>display-buffer</code>' will see '<code>inhibit-switch-frame</code>'
+set for every buffer it's asked to switch to, and so will not
+de-iconify, raise, or otherwise monkey around with frame things in
+the process of displaying buffers. It's possible that this will
+have undesirable side effects in some circumstances, but as far as
+I can tell things like '<code>speedbar</code>' and 'C-x 5 &lt;whatever>' still
+work for me afterward, so new frames are getting created when I
+want them to be.</p>
+
+<p>(I could change the initial '<code>t</code>' to something more complex, for
+example to only apply this to <a href="https://www.gnu.org/software/emacs/manual/html_mono/mh-e.html">MH-E</a>
+buffers, which is where I mostly encounter the problem. See
+<a href="https://www.masteringemacs.org/article/demystifying-emacs-window-manager">Demystifying Emacs’s Window Manager</a> for a discussion of how to
+do this based on the major mode of the buffer.)</p>
+
+<p>To see if you're affected by this, you can run the following
+Emacs Lisp in the scratch buffer and then immediately minimize
+or iconify the window.</p>
+
+<blockquote><pre style="white-space: pre-wrap;">
+(progn
+  (sleep-for 5)
+  (display-buffer "*scratch*"))
+</pre>
+</blockquote>
+
+<p>If you're affected, the Emacs window will pop back open in a few
+seconds (five or less, depending on how fast you minimized the
+window). If the Emacs window stays minimized or iconified, your
+desktop environment is probably overriding whatever Emacs is
+trying to do.</p>
+
+<p>For me this generally happens any time some piece of Emacs Lisp
+code is taking a long time to get a buffer ready for display and
+then calls '<code>display-buffer</code>' at the end to show the buffer. One
+trigger for this is if the buffer to be displayed contains a bunch
+of unusual Unicode characters (possibly ones that my font doesn't
+have anything for). The first time the characters are used, Emacs
+will apparently stall working out how to render them and then
+de-iconify itself if I've iconified it out of impatience.</p>
+
+<p>(It's quite possible that there's a better way to do this, and if
+so I'd love to know about it.)</p>
+</div>
+<small><a href="/~cks/space/blog/programming/EmacsForcingNoDeiconification">programming/EmacsForcingNoDeiconification</a> written at 22:20:05; <a href="/~cks/space/blog/programming/EmacsForcingNoDeiconification?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<p> </p>
+<p class="daymarker" align=center><b>2025-07-24</b></p>
+<div class="blogentry">
+<div class="entryid"> <h2> <a href="/~cks/space/blog/tech/DrawingCommandsVsSendingImages">DrawingCommandsVsSendingImages</a> </h2> </div>
+<div class="wikitext"><h2>Sending drawing commands to your display server versus sending images</h2>
+
+<p>One of the differences between X and Wayland is that <a href="/~cks/space/blog/unix/XRenderingVsWaylandRendering">in the
+classical version of X you send drawing commands to the server while
+in Wayland you send images</a>;
+this can be called <em>server side rendering</em> versus <em>client side
+rendering</em>. Client side rendering doesn't preclude a 'network
+transparent' display protocol, but it does mean that you're shipping
+around images instead of drawing commands. Is this less efficient?
+In thinking about it recently, I realized that the answer is that
+it depends on a number of things.</p>
+
+<p>Let's start out by assuming that the display server and the display
+clients are equally powerful and capable as far as rendering the
+graphics goes, so the only question is where the rendering happens
+(and what makes it better to do it in one place instead of another).
+The factors that I can think of are:</p>
+
+<ul><li>How many different active client (machines) there are; if there are
+enough, the active client machines have more aggregate rendering
+capacity than the server does. But probably you don't usually have
+all that many different clients all doing rendering at once (that
+would be a very busy display).<p>
+</li>
+<li>The number of drawing commands as compared to the size of the
+rendered result. In an extreme case in favor of client side
+rendering, a client executes a whole bunch of drawing commands
+in order to render a relatively small image (or window, or etc).
+In an extreme case the other way, a client can send only a few
+drawing commands to render a large image area.</li>
+<li>The amount of input data the drawing commands need compared to
+the output size of the rendered result. An extreme case in favour
+of client side rendering is if the client is compositing together
+a (large) stack of things to produce a single rendered result.</li>
+<li>How efficiently you can encode (and decode) the rendered result
+or the drawing commands (and their inputs). There's a tradeoff
+of space used to encoding and decoding time, where you may not
+be able to afford aggressive encoding because it gets in the
+way of fast updates.<p>
+What these add up to is the aggregate size of the drawing commands
+and all of the inputs that they need relative to the rendered
+result, possibly cleverly encoded on both sides.<p>
+</li>
+<li>How much changes from frame to frame and how easily you can encode
+that in some compact form. Encoding changes in images is a well
+studied thing (we call it 'video'), but a drawing command model
+might be able to send only a few commands to change a little bit
+of what it sent previously for an even bigger saving.<p>
+(This is affected by how a server side rendering server holds the
+information from clients. Does it execute their draw commands
+then only retain the final result, as X does, or does it hold
+their draw commands and re-execute them whenever it needs to
+re-render things? Let's assume it holds the rendered result, so
+you can draw over it with new drawing commands rather than having
+to send a new full set of 'draw this from now onward' commands.)<p>
+A pragmatic advantage of client side rendering is that encoding
+image to image changes can be implemented generically after any
+style of rendering; all you need is to retain a copy of the
+previous frame (or perhaps more frames than that, depending).  In
+a server rendering model, the client needs specific support for
+determining a set of drawing operations to 'patch' the previous
+result, and this doesn't necessarily cooperate with an <a href="https://en.wikipedia.org/wiki/Immediate_mode_(computer_graphics)">immediate
+mode approach</a> where
+the client regenerates the entire set of draw commands from scratch
+any time it needs to re-render a frame.</li>
+</ul>
+
+<p>I was going to say that the network speed is important too but while
+it matters, what I think it does is magnifies or shrinks the effect
+of the relative size of drawing commands compared to the final
+result. The faster and lower latency your network is, the less it
+matters if you ship more data in aggregate. On a slow network, it's
+much more important.</p>
+
+<p>There's probably other things I'm missing, but even with just these
+I've wound up feeling that the tradeoffs are not as simple and
+obvious as I believed before I started thinking about it.</p>
+
+<p>(This was sparked by <a href="https://mastodon.social/@cks/114910825048977500">an offhand Fediverse remark and joke</a>.)</p>
+</div><div class="commenttools">(<a href="/~cks/space/blog/tech/DrawingCommandsVsSendingImages?showcomments#comments">4 comments</a>.)</div>
+<small><a href="/~cks/space/blog/tech/DrawingCommandsVsSendingImages">tech/DrawingCommandsVsSendingImages</a> written at 23:18:14; <a href="/~cks/space/blog/tech/DrawingCommandsVsSendingImages?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<p> </p>
+<p class="daymarker" align=center><b>2025-07-23</b></p>
+<div class="blogentry">
+<div class="entryid"> <h2> <a href="/~cks/space/blog/programming/BashGoodSetEReports">BashGoodSetEReports</a> </h2> </div>
+<div class="wikitext"><h2>Getting decent error reports in Bash when you're using 'set -e'</h2>
+
+<p>Suppose that you have a shell script that's not necessarily complex
+but is at least long. For reliability, you use 'set -e' so that the
+script will immediately stop on any unexpected errors from commands,
+and sometimes this happens. Since this isn't supposed to happen, it
+would be nice to print some useful information about what went wrong,
+such as where it happened, what the failing command's exit status was,
+and what the command was. The good news is that if you're willing to
+make your script specifically a Bash script, you can do this quite
+easily.</p>
+
+<p>The Bash trick you need is:</p>
+
+<blockquote><pre style="white-space: pre-wrap;">
+trap 'echo "Exit status $? at line $LINENO from: $BASH_COMMAND"' ERR
+</pre>
+</blockquote>
+
+<p>This uses three Bash features: the special <a href="https://www.gnu.org/software/bash/manual/bash.html#index-LINENO">'<code>$LINENO</code>'</a>
+and <a href="https://www.gnu.org/software/bash/manual/bash.html#index-BASH_005fCOMMAND">'<code>$BASH_COMMAND</code>'</a>
+environment variables (which have the command executed just before
+the trap and the line number), and the special 'ERR' Bash <a href="https://www.gnu.org/software/bash/manual/bash.html#index-trap">'<code>trap</code>'</a>
+condition that causes your 'trap' statement to be invoked right
+when 'set -e' is causing your script to fail and exit.</p>
+
+<p>Using 'ERR' instead of 'EXIT' (or '0' if you're a traditionalist
+like me) is necessary in order to get the correct line number in
+Bash. If you switch this to 'trap ... EXIT', the line number that
+Bash will report is the line that the '<code>trap</code>' was defined on, not
+the line that the failing command is on (although the command being
+executed remains the same). This makes a certain amount of sense
+from the right angle; the shell is currently on that line as it's
+exiting.</p>
+
+<p>As far as I know, no other version of the Bourne shell can do all
+of this. The OpenBSD version of /bin/sh has a '<code>$LINENO</code>' variable
+and 'trap ... 0' preserves its value (instead of resetting it to
+the line of the 'trap'), but it has no access to the current command.
+The FreeBSD version of /bin/sh resets '<code>$LINENO</code>' to the line of
+your 'trap ... 0', so the best you can do is report the exit status.
+Dash, the Ubuntu 24.04 default /bin/sh, doesn't have '<code>$LINENO</code>',
+effectively putting you in the same situation as FreeBSD.</p>
+
+<p>(On Fedora, /bin/sh is Bash, and the Fedora version of Bash supports
+all of 'trap .. ERR', <code>$LINENO</code>, and <code>$BASH_COMMAND</code> even when
+invoked as '#!/bin/sh' by your script. You probably shouldn't count
+on this; if you want Bash, use '#!/bin/bash'.)</p>
+</div><div class="commenttools">(<a href="/~cks/space/blog/programming/BashGoodSetEReports?showcomments#comments">2 comments</a>.)</div>
+<small><a href="/~cks/space/blog/programming/BashGoodSetEReports">programming/BashGoodSetEReports</a> written at 22:57:21; <a href="/~cks/space/blog/programming/BashGoodSetEReports?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<p> </p>
+<p class="daymarker" align=center><b>2025-07-22</b></p>
+<div class="blogentry">
+<div class="entryid"> <h2> <a href="/~cks/space/blog/linux/NFSv4DelegationMandatoryLock">NFSv4DelegationMandatoryLock</a> </h2> </div>
+<div class="wikitext"><h2>NFS v4 delegations on a Linux NFS server can act as mandatory locks</h2>
+
+<p>Over on the Fediverse, <a href="https://mastodon.social/@cks/114898071269948736">I shared an unhappy learning experience</a>:</p>
+
+<blockquote><p>Linux kernel NFS: we don't have mandatory locks. <br>
+Also Linux kernel NFS: if the server has delegated a file to a NFS
+client that's now not responding, good luck writing to the file from
+any other machine. Your writes will hang.</p>
+</blockquote>
+
+<p>NFS v4 <a href="https://datatracker.ietf.org/doc/html/rfc7530#section-10.2"><em>delegations</em></a> are
+an feature where the NFS server, such as <a href="/~cks/space/blog/linux/ZFSFileserverSetupIII">your Linux fileserver</a>, hands a lot of authority over a particular
+file over to a client that is using that file. There are various
+sorts of delegations, but even a basic read delegation will force
+the NFS server to <em>recall</em> the delegation if anything else wants
+to write to the file or to remove it. Recalling a delegation requires
+notifying the NFS v4 client that it has lost the delegation and
+then having the client accept and respond to that. NFS v4 clients
+have to respond to the loss of a delegation because they may be
+holding local state that needs to be flushed back to the NFS server
+before the delegation can be released.</p>
+
+<p>(After all the NFS v4 server promised the client 'this file is yours
+to fiddle around with, I will consult you before touching it'.)</p>
+
+<p>Under some circumstances, when the NFS v4 server is unable to contact
+the NFS v4 client, it will simply sit there waiting and as part of
+that will not allow you to do things that require the delegation
+to be released. I don't know if there's a delegation recall timeout,
+although I suspect that there is, and I don't know how to find out
+what the timeout is, but whatever the value is, it's substantial
+(it may be the 90 second 'default lease time' from
+<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/nfsd/nfs4state.c#n4840">nfsd4_init_leases_net()</a>,
+or perhaps the 'grace', also probably 90 seconds, or perhaps the
+two added together).</p>
+
+<p>(90 seconds is not what I consider a tolerable amount of time for
+my editor to completely freeze when I tell it to write out a new
+version of the file. When NFS is involved, I will typically assume
+that something has gone badly wrong well before then.)</p>
+
+<p>As mentioned, the NFS v4 RFC also explicitly notes that NFS v4
+clients may have to flush file state in order to release their
+delegation, and this itself may take some time. So even without an
+unavailable client machine, recalling a delegation may stall for
+some possibly arbitrary amount of time (depending on how the NFS
+v4 server behaves; the RFC encourages NFS v4 servers to not be hasty
+if the client seems to be making a good faith effort to clear its
+state). Both the slow client recall and the hung client recall can
+happen even in the absence of any actual file locks; in my case,
+the now-unavailable client merely having read from the file was
+enough to block things.</p>
+
+<p>This blocking recall is effectively a mandatory lock, and it affects
+both remote operations over NFS and local operations on the fileserver
+itself. Short of waiting out whatever timeout applies, you have two
+realistic choices to deal with this (the non-realistic choice is
+to reboot the fileserver). First, you can bring the NFS client back
+to life, or at least something that's at its IP address and responds
+to the server with NFS v4 errors. Second, I believe you can force
+everything from the client to expire through <a href="https://man7.org/linux/man-pages/man7/nfsd.7.html">/proc/fs/nfsd</a>/clients/&lt;ID>,
+by writing 'expire' to the client's 'ctl' file. You can find the
+right client ID by grep'ing for something in all of the clients/*/info
+files.</p>
+
+<p>Discovering this makes me somewhat more inclined than before to
+consider entirely disabling 'leases', the underlying kernel feature
+that is used to implement these NFS v4 delegations (I discovered
+how to do this <a href="/~cks/space/blog/linux/NFSv4ServerLockClientsII">when investigating NFS v4 client locks on the
+server</a>). This will also affect local
+processes on the fileserver, but that now feels like a feature since
+hung NFS v4 delegation recalls will stall or stop even local
+operations.</p>
+</div>
+<small><a href="/~cks/space/blog/linux/NFSv4DelegationMandatoryLock">linux/NFSv4DelegationMandatoryLock</a> written at 21:33:31; <a href="/~cks/space/blog/linux/NFSv4DelegationMandatoryLock?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<p> </p>
+<p class="daymarker" align=center><b>2025-07-21</b></p>
+<div class="blogentry">
+<div class="entryid"> <h2> <a href="/~cks/space/blog/tech/ProjectsArePeople">ProjectsArePeople</a> </h2> </div>
+<div class="wikitext"><h2>Projects can't be divorced from the people involved in them</h2>
+
+<p>Among computer geeks, myself included, there's a long running
+optimistic belief that projects can be considered in isolation and
+'evaluated on their own merits', divorced from the specific people
+or organizations that are involved with them and <a href="/~cks/space/blog/tech/CultureImpactAndOpenBSD">the culture that
+they have created</a>. At best, this view
+imagines that we can treat everyone involved in the development of
+something as a reliable Vulcan, driven entirely by cold logic with
+no human sentiment involved. This is demonstrably false (ask anyone
+about the sharp edge of Linus Torvalds' emails), but convenient, at
+least for <a href="/~cks/space/blog/web/WhyNotProfilePictures">people with privilege</a>.</p>
+
+<p>(A related thing is considering projects in isolation from the
+organizations that create and run them, for example ignoring that
+something is from <a href="https://killedbygoogle.com/">'killed by' Google</a>.)</p>
+
+<p>Over time, I have come to understand and know that this is false,
+much like <a href="/~cks/space/blog/tech/InternetAssholes">other things I used to accept</a>. The
+people involved with a project bring with them attitudes and social
+views, and they create a culture through their actions, their
+expressed views, and even their presence. Their mere presence matters
+because it affects other people, and how other people will or won't
+interact with the project.</p>
+
+<p>(To put it one way, the odds that I will want to be involved in a
+project run by someone who openly expresses their view that bicyclists
+are the scum of the earth and should be violently run off the road
+are rather low, regardless of how they behave within the confines
+of the project. I'm not a Vulcan myself and so I am not going to
+be able to divorce my interactions with this person from my knowledge
+that they would like to see me and my <a href="https://tbn.ca/">bike club</a>
+friends injured or dead.)</p>
+
+<p>You can't divorce a project from its culture or its people (partly
+because the people create and sustain that culture); the culture
+and the specific people are entwined into how 'the project' (which
+is to say, the crowd of people involved in it) behaves, and who it
+attracts and repels. And once established, the culture of a project,
+like the culture of anything, is very hard to change, partly because
+it acts as a filter for who becomes involved in the project. The
+people who create a project gather like-minded people who see nothing
+wrong with the culture and often act to perpetuate it, unless the
+project becomes so big and so important that other people force
+their way in (usually because a corporation is paying them to put
+up with the initial culture).</p>
+
+<p>(There is culture everywhere. C++ has a culture (or several), for
+example, as does Rust. Are they good cultures? People have various
+opinions that I will let you read about yourself.)</p>
+</div><div class="commenttools">(<a href="/~cks/space/blog/tech/ProjectsArePeople?showcomments#comments">2 comments</a>.)</div>
+<small><a href="/~cks/space/blog/tech/ProjectsArePeople">tech/ProjectsArePeople</a> written at 22:51:11; <a href="/~cks/space/blog/tech/ProjectsArePeople?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<p> </p>
+<p class="daymarker" align=center><b>2025-07-20</b></p>
+<div class="blogentry">
+<div class="entryid"> <h2> <a href="/~cks/space/blog/sysadmin/MachineRoomTempTwoSortsOfAlerts">MachineRoomTempTwoSortsOfAlerts</a> </h2> </div>
+<div class="wikitext"><h2>Realizing we needed two sorts of alerts for our temperature monitoring</h2>
+
+<p>We have <a href="/~cks/space/blog/sysadmin/MachineRoomTempMonitoring">a long standing system to monitor the temperatures of our
+machine rooms and alert us if there are problems</a>. A recent discussion about the state
+of the temperature in one of them made me realize that we want to
+monitor and alert for two different problems, and because they're
+different we need two different sorts of alerts in <a href="/~cks/space/blog/sysadmin/PrometheusGrafanaSetup-2019">our monitoring
+system</a>.</p>
+
+<p>The first, obvious problem is a machine room AC failure, where the
+AC shuts off or becomes almost completely ineffective. In our machine
+rooms, an AC failure causes a rapid and sustained rise in temperature
+to well above its normal maximum level (which is typically reached
+just before the AC starts its next cooling cycle). AC failures are
+high priority issues that we want to alert about rapidly, because
+we don't have much time before machines start to cook themselves
+(<a href="/~cks/space/blog/tech/TemperatureLimitTripThoughts">and they probably won't shut themselves down before the damage
+has been done</a>).</p>
+
+<p>The second problem is an AC unit that can't keep up with the room's
+heat load; perhaps its filters are (too) clogged, or it's not getting
+enough cooling from the roof chillers, or various other mysterious
+AC reasons. The AC hasn't failed and it is still able to cool things
+to some degree and keep the temperature from racing up, but over
+time the room's temperature steadily drifts upward. Often the AC
+will still be cycling on and off to some degree and we'll see the
+room temperature vary up and down as a result; at other things the
+room temperature will basically reach a level and more or less stay
+there, presumably with the AC running continuously.</p>
+
+<p>One issue we ran into is that a fast triggering alert that was
+implicitly written for the AC failure case can wind up flapping up
+and down if insufficient AC has caused the room to slowly drift
+close to its triggering temperature level. As the AC works (and
+perhaps cycles on and off), the room temperature will shift above
+and then back below the trigger level, and the alert flaps.</p>
+
+<p>We can't detect both situations with a single alert, so we need at
+least two. Currently, the 'AC is not keeping up' alert looks for
+sustained elevated temperatures with the temperature always at or
+above a certain level over (much) more time than the AC should take
+to bring it down, even if the AC has to avoid starting for a bit
+of time to not cycle too fast. The 'AC may have failed' alert looks
+for high temperatures over a relatively short period of time,
+although we may want to make this an average over a short period
+of time.</p>
+
+<p>(The advantage of an average is that if the temperature is shooting
+up, it may trigger faster than a 'the temperature is above X for Y
+minutes' alert. The drawback is that an average can flap more readily
+than a 'must be above X for Y time' alert.)</p>
+</div><div class="commenttools">(<a href="/~cks/space/blog/sysadmin/MachineRoomTempTwoSortsOfAlerts?showcomments#comments">3 comments</a>.)</div>
+<small><a href="/~cks/space/blog/sysadmin/MachineRoomTempTwoSortsOfAlerts">sysadmin/MachineRoomTempTwoSortsOfAlerts</a> written at 23:10:57; <a href="/~cks/space/blog/sysadmin/MachineRoomTempTwoSortsOfAlerts?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<p> </p>
+<p class="daymarker" align=center><b>2025-07-19</b></p>
+<div class="blogentry">
+<div class="entryid"> <h2> <a href="/~cks/space/blog/sysadmin/ChecklistsAreHardButGood">ChecklistsAreHardButGood</a> </h2> </div>
+<div class="wikitext"><h2>Checklists are hard (but still a good thing)</h2>
+
+<p><a href="https://support.cs.toronto.edu/">We</a> recently had a big downtime
+at work where part of the work was me doing a relatively complex
+and touchy thing. Naturally <a href="/~cks/space/blog/sysadmin/UseAChecklist">I made a checklist</a>,
+but also naturally my checklist turned out to be incomplete, with
+some things I'd forgotten and some steps that weren't quite right
+or complete. This is a good illustration that checklists are hard
+to create.</p>
+
+<p>Checklists are hard partly because they require us to try to remember,
+reconstruct, and understand everything in what's often a relatively
+complex system that is too big for us to hold in our mind. If your
+understanding is incomplete you can overlook something and so leave
+out a step or a part of a step, and even if you write down a step
+you may not fully remember (and record) why the step has to be
+there. My view is that this is especially likely in system
+administration where we may have any number of things that have
+been quietly sitting in the corner for some time, working away
+without problems, and so they've slipped out of our minds.</p>
+
+<p>(For example, one of the issues that we ran into in this downtime
+was not remembering all of the hosts that ran crontab jobs that
+used one particular filesystem. Of course we thought we did know,
+so we didn't try to systematically look for such crontab jobs.)</p>
+
+<p>To get a really solid checklist you have to be able to test it,
+much like <a href="/~cks/space/blog/sysadmin/DocumentationNeedsTesting">all documentation needs testing</a>.
+Unfortunately, a lot of the checklists I write (<a href="/~cks/space/blog/sysadmin/AlwaysMakeAChecklist">or don't write</a>) are for one-off things that we can't really
+test in advance for various reasons, for example because they involve
+a large scale change to our live systems (that requires a downtime).
+If you're lucky you'll realize that you don't know something or
+aren't confident in something while writing the checklist, so you
+can investigate it and hopefully get it right, but some of the time
+you'll be confident you understand the problem but you're wrong.</p>
+
+<p>Despite any imperfections, <a href="/~cks/space/blog/sysadmin/UseAChecklist">checklists are still a good thing</a>. An imperfect written down checklist is better than
+relying on your memory and mind on the fly almost all of the time
+(the rare exceptions are when you wouldn't even dare do the operation
+without a checklist but an imperfect checklist tempts you into doing
+it and fumbling).</p>
+
+<p>(You can try to improve the situation by keeping notes on what was
+missed in the checklist and then saving or publishing these notes
+somewhere. You can review these after the fact notes on what was
+missed in this specific checklist if you have to do the thing again,
+or look for specific types of things you tend to overlook and should
+specifically check for the next time you're making a checklist that
+touches on some area.)</p>
+</div><div class="commenttools">(<a href="/~cks/space/blog/sysadmin/ChecklistsAreHardButGood?showcomments#comments">3 comments</a>.)</div>
+<small><a href="/~cks/space/blog/sysadmin/ChecklistsAreHardButGood">sysadmin/ChecklistsAreHardButGood</a> written at 23:09:43; <a href="/~cks/space/blog/sysadmin/ChecklistsAreHardButGood?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<p> </p>
+
+ <strong><div class="rangenav"> (<a href="/~cks/space/blog/range/11-20/" rel="nofollow">Previous 10</a>) </div></strong>
+</div>
+<div class="sidebar">
+	<div class="readme"> <div class="wikitext"><p>These are my <a href="/~cks/space/blog/">WanderingThoughts</a> <br>
+(<a href="/~cks/space/AboutBlog">About the blog</a>)</p>
+
+<p><a href="/~cks/space/blog/__Index">Full index of entries</a> <br>
+<a href="/~cks/space/blog/__RecentComments">Recent comments</a></p>
+
+<p>This is part of <a href="/~cks/space/FrontPage">CSpace</a>, and is written by <a href="/~cks/space/People/ChrisSiebenmann">ChrisSiebenmann</a>. <br>
+Mastodon: <a href="https://mastodon.social/@cks">@cks</a> <br>
+<strike>Twitter</strike> @thatcks</p>
+
+<p align="center">* * *</p>
+
+<p>Categories: <a href="/~cks/space/blog/links/">links</a>, <a href="/~cks/space/blog/linux/">linux</a>, <a href="/~cks/space/blog/programming/">programming</a>, <a href="/~cks/space/blog/python/">python</a>, <a href="/~cks/space/blog/snark/">snark</a>, <a href="/~cks/space/blog/solaris/">solaris</a>, <a href="/~cks/space/blog/spam/">spam</a>, <a href="/~cks/space/blog/sysadmin/">sysadmin</a>, <a href="/~cks/space/blog/tech/">tech</a>, <a href="/~cks/space/blog/unix/">unix</a>, <a href="/~cks/space/blog/web/">web</a> <br>
+Also: <a href="/~cks/space/blog/__Topics">(Sub)topics</a></p>
+
+<p>This is a <a href="/~cks/space/dwiki/DWiki">DWiki</a>. <br>
+<a href="/~cks/space/help/GettingAround">GettingAround</a> <br>
+(<a href="/~cks/space/help/Help">Help</a>)</p>
+</div> </div>
+<div class="sidesearch" style="font-size: small"> <form method=get action="/~cks/space/">Search: <input name=search size=15></form> </div>
+</div>
+</div>
+ 
+</div>
+
+<hr> Page tools: <a href="/~cks/space/blog/latest/10/?normal" rel="nofollow">See As Normal</a>. 
+<div class="bottombar">
+	<div class="left"><form method=get action="/~cks/space/">Search: <input name=search size=15></form></div>
+	<div class="right"><form method=post action="/~cks/space/.login">
+Login: <input name=login size=10>
+Password: <input type=password name=password size=10>
+<input type=hidden name=view value=login>
+<input type=hidden name=page value="blog/latest/10">
+<input type=submit value="Login"></form></div> <div class="clear"></div>
+</div>
+<div id="atomfeeds">Atom Syndication: <a type="application/atom+xml" href="/~cks/space/blog/latest/10/?atom" rel="nofollow">Recent Pages</a>, <a type="application/atom+xml" href="/~cks/space/blog/?atomcomments" rel="nofollow">Recent Comments</a>.</div>
+
+<hr> 
+<address>This dinky wiki is brought to you by the Insane Hackers
+Guild, Python sub-branch.</address>
+</body>
+</html>
