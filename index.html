@@ -4,34 +4,28 @@
 	<title> Chris&#39;s Wiki :: blog/latest/10 </title>
 	<link href="./dwiki.css" rel="stylesheet" type="text/css"> 
 	<meta name="viewport" content="width=device-width">
-	<link rel="alternate" type="application/atom+xml" href="/~cks/space/blog/latest/10/?atom">
-	 <meta name="robots" content="noindex">
 </head>
 <body>
 <div id="header">
-	<div class="left"><a href="/~cks/">Chris Siebenmann</a> ::
-<span class="breadcrumbs"><a href="/~cks/space/">CSpace</a> &raquo;
-       <a href="/~cks/space/blog/">blog</a> &raquo;
-       <a href="/~cks/space/blog/latest/">latest</a> &raquo;
-       10</span></div>
+	<div class="left">Chris Siebenmann ::
 	<div class="right">Welcome, guest.</div>
 </div>
 
 <div id="documentbody">
-<h1 class="wttitle"> <a href="/~cks/space/blog/">Wandering Thoughts</a> archives <!-- latest/10 --> </h1>
+<h1 class="wttitle"> <a href="./index.html">Wandering Thoughts</a> archives <!-- latest/10 --> </h1>
 <div class="wtblog">
 <div class="maintext"> 
-	<p class="daymarker" align=center><b>2025-07-28</b></p>
+	<p class="daymarker" align=center><b>2017-07-28</b></p>
 <div class="blogentry">
-<div class="entryid"> <h2> <a href="/~cks/space/blog/unix/V7GaveUsEnvironmentVariables">V7GaveUsEnvironmentVariables</a> </h2> </div>
+<div class="entryid"> <h2> V7GaveUsEnvironmentVariables </h2> </div>
 <div class="wikitext"><h2>Another thing V7 Unix gave us is environment variables</h2>
 
 <p>Simon Tatham <a href="https://hachyderm.io/@simontatham/114930798039492914">recently wondered "Why is PATH called PATH?"</a>. This made
 me wonder the closely related question of when environment variables
 appeared in Unix, and the answer is that <strong>the environment and
 environment variables appeared in V7 Unix</strong> as another of the things
-that <a href="/~cks/space/blog/unix/V7WhyItMattersSoMuch">made it so important to Unix history</a>
-(<a href="/~cks/space/blog/unix/RemarkableV7">also</a>).</p>
+that made it so important to Unix history
+(also).</p>
 
 <p>Up through V6, the exec system call and family of system calls took
 two arguments, the path and the argument list; we can see this in
@@ -80,13 +74,13 @@ longer, more explicit one) simply as a matter of Unix style at the
 time. Pretty much everything in V7 was terse and short in this style
 for various reasons, and verbose environment variable names would
 have reduced that limited exec argument space.</p>
-</div><div class="commenttools">(<a href="/~cks/space/blog/unix/V7GaveUsEnvironmentVariables?showcomments#comments">2 comments</a>.)</div>
-<small><a href="/~cks/space/blog/unix/V7GaveUsEnvironmentVariables">unix/V7GaveUsEnvironmentVariables</a> written at 22:38:20; <a href="/~cks/space/blog/unix/V7GaveUsEnvironmentVariables?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<small>unix/V7GaveUsEnvironmentVariables written at 22:38:20; </small>
 </div>
 <p> </p>
-<p class="daymarker" align=center><b>2025-07-27</b></p>
+<p class="daymarker" align=center><b>2017-07-27</b></p>
 <div class="blogentry">
-<div class="entryid"> <h2> <a href="/~cks/space/blog/python/ArgparseVariableArgumentCount">ArgparseVariableArgumentCount</a> </h2> </div>
+<div class="entryid"> <h2> ArgparseVariableArgumentCount </h2> </div>
 <div class="wikitext"><h2>Python argparse and the minor problem of a variable valid argument count</h2>
 
 <p><a href="https://docs.python.org/3/library/argparse.html">Argparse</a> is the
@@ -95,7 +89,7 @@ programs, and because for small programs, Python makes using things
 outside the standard library quite annoying, it's the one I use in
 my Python based utility programs. Recently I found myself dealing
 with a little problem where <a href="https://docs.python.org/3/library/argparse.html">argparse</a> doesn't have a
-good answer, partly because <a href="/~cks/space/blog/python/ArgparseAndNestedGroups">you can't nest argument groups</a>.</p>
+good answer, partly because you can't nest argument groups.</p>
 
 <p>Suppose, not hypothetically, that you have a program that can
 properly take zero, two, or three command line arguments (which are
@@ -136,12 +130,12 @@ and which could signal errors to argparse that argparse handled in
 its standard way, giving you uniform argument validation and error
 text and so on.</p>
 </div>
-<small><a href="/~cks/space/blog/python/ArgparseVariableArgumentCount">python/ArgparseVariableArgumentCount</a> written at 23:30:17; <a href="/~cks/space/blog/python/ArgparseVariableArgumentCount?writecomment" rel="nofollow">Add Comment</a></small>
+<small>python/ArgparseVariableArgumentCount written at 23:30:17; </small>
 </div>
 <p> </p>
-<p class="daymarker" align=center><b>2025-07-26</b></p>
+<p class="daymarker" align=center><b>2016-07-26</b></p>
 <div class="blogentry">
-<div class="entryid"> <h2> <a href="/~cks/space/blog/unix/UnixHadToEvolve">UnixHadToEvolve</a> </h2> </div>
+<div class="entryid"> <h2> UnixHadToEvolve </h2> </div>
 <div class="wikitext"><h2>Unix had good reasons to evolve since V7 (and had to)</h2>
 
 <p>There's a certain sort of person who feels that the platonic ideal
@@ -153,12 +147,12 @@ it long ago when it was simpler (although not as far back as V7),
 I reject this view and think it's completely mistaken.</p>
 
 <p>V7 Unix was simple but it was also limited, both in its implementation
-(which often <a href="/~cks/space/blog/unix/BufferedIOBeforeMalloc">took shortcuts</a> (<a href="/~cks/space/blog/unix/SignalsHowOld">also</a>, <a href="/~cks/space/blog/unix/TwoFileDescriptorLimits">also</a>, <a href="/~cks/space/blog/unix/FilesystemStatDeviceProblem">also</a>) and in its overall features (<a href="/~cks/space/blog/unix/UnixEarlyFilenameLengths">such
-as short filenames</a>).  Obviously V7 didn't
+(which often took shortcuts) and in its overall features (such
+as short filenames).  Obviously V7 didn't
 have networking, but even things that most people think of as
-perfectly reasonable and good Unix features like <a href="/~cks/space/blog/unix/ExecAndShebangHistory">'#!' support for
-shell scripts in the kernel</a> and <a href="/~cks/space/blog/unix/NewgrpCommandWhy">processes
-being in multiple groups at once</a>. That V7 was
+perfectly reasonable and good Unix features like '#!' support for
+shell scripts in the kernel and processes
+being in multiple groups at once. That V7 was
 a simple and limited system meant that its choices were to grow to
 meet people's quite reasonable needs or to fall out of use.</p>
 
@@ -194,13 +188,13 @@ undesirable ways by these forces; consider, for example, C++.</p>
 <p>(It's also clear that a lot of people involved in the historical
 evolution of BSD and other Unixes were really quite smart, even if
 you don't like, for example, the BSD sockets API.)</p>
-</div><div class="commenttools">(<a href="/~cks/space/blog/unix/UnixHadToEvolve?showcomments#comments">One comment</a>.)</div>
-<small><a href="/~cks/space/blog/unix/UnixHadToEvolve">unix/UnixHadToEvolve</a> written at 23:21:55; <a href="/~cks/space/blog/unix/UnixHadToEvolve?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<small>unix/UnixHadToEvolve written at 23:21:55; </small>
 </div>
 <p> </p>
-<p class="daymarker" align=center><b>2025-07-25</b></p>
+<p class="daymarker" align=center><b>2017-07-25</b></p>
 <div class="blogentry">
-<div class="entryid"> <h2> <a href="/~cks/space/blog/programming/EmacsForcingNoDeiconification">EmacsForcingNoDeiconification</a> </h2> </div>
+<div class="entryid"> <h2> EmacsForcingNoDeiconification </h2> </div>
 <div class="wikitext"><h2>Mostly stopping GNU Emacs from de-iconifying itself when it feels like it</h2>
 
 <p>Over on the Fediverse <a href="https://mastodon.social/@cks/114902910719483684">I had a long standing GNU Emacs gripe</a>:</p>
@@ -249,7 +243,7 @@ that's a Lisp function that calls <code>make-frame-visible</code>. It's only
 used a little bit in the Emacs Lisp code base.)</p>
 
 <p>A determined person could probably hook these C-level functions
-through <a href="/~cks/space/blog/programming/EmacsChangingLispWithAdviceAdd"><code>advice-add</code></a> to make
+through <code>advice-add</code> to make
 them do nothing if they were called on an existing, mapped frame
 that was just iconified. That would be the elegant way to do what
 I want.  The inelegant way is to discover, via use of <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Debugging.html">the Emacs
@@ -318,17 +312,17 @@ de-iconify itself if I've iconified it out of impatience.</p>
 <p>(It's quite possible that there's a better way to do this, and if
 so I'd love to know about it.)</p>
 </div>
-<small><a href="/~cks/space/blog/programming/EmacsForcingNoDeiconification">programming/EmacsForcingNoDeiconification</a> written at 22:20:05; <a href="/~cks/space/blog/programming/EmacsForcingNoDeiconification?writecomment" rel="nofollow">Add Comment</a></small>
+<small>programming/EmacsForcingNoDeiconification written at 22:20:05; </small>
 </div>
 <p> </p>
-<p class="daymarker" align=center><b>2025-07-24</b></p>
+<p class="daymarker" align=center><b>2017-07-24</b></p>
 <div class="blogentry">
-<div class="entryid"> <h2> <a href="/~cks/space/blog/tech/DrawingCommandsVsSendingImages">DrawingCommandsVsSendingImages</a> </h2> </div>
+<div class="entryid"> <h2> DrawingCommandsVsSendingImages </h2> </div>
 <div class="wikitext"><h2>Sending drawing commands to your display server versus sending images</h2>
 
-<p>One of the differences between X and Wayland is that <a href="/~cks/space/blog/unix/XRenderingVsWaylandRendering">in the
+<p>One of the differences between X and Wayland is that in the
 classical version of X you send drawing commands to the server while
-in Wayland you send images</a>;
+in Wayland you send images;
 this can be called <em>server side rendering</em> versus <em>client side
 rendering</em>. Client side rendering doesn't preclude a 'network
 transparent' display protocol, but it does mean that you're shipping
@@ -403,13 +397,74 @@ I've wound up feeling that the tradeoffs are not as simple and
 obvious as I believed before I started thinking about it.</p>
 
 <p>(This was sparked by <a href="https://mastodon.social/@cks/114910825048977500">an offhand Fediverse remark and joke</a>.)</p>
-</div><div class="commenttools">(<a href="/~cks/space/blog/tech/DrawingCommandsVsSendingImages?showcomments#comments">4 comments</a>.)</div>
-<small><a href="/~cks/space/blog/tech/DrawingCommandsVsSendingImages">tech/DrawingCommandsVsSendingImages</a> written at 23:18:14; <a href="/~cks/space/blog/tech/DrawingCommandsVsSendingImages?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<small>tech/DrawingCommandsVsSendingImages written at 23:18:14; </small>
 </div>
 <p> </p>
-<p class="daymarker" align=center><b>2025-07-23</b></p>
+<p class="daymarker" align=center><b>2016-07-30</b></p>
 <div class="blogentry">
-<div class="entryid"> <h2> <a href="/~cks/space/blog/programming/BashGoodSetEReports">BashGoodSetEReports</a> </h2> </div>
+<div class="entryid"> <h2> CommandBotGate </h2> </div>
+<div class="wikitext"><h2>A bot that lets you in (or doesn't)</h2>
+
+<p>Most bots sit around responding to pings or doing mod nonsense. This one guards
+a room. It's the only way in. There's no form, no user list, no invite system—
+just a TCP chatroom at <code>185.232.52.111</code> where you talk to a bot.
+If it likes you, the wall drops. If not, you're ignored.</p>
+
+<p>When you connect, the only thing that talks is the bot. It gives you one line:</p>
+
+<pre>
+[gate] say something useful.
+</pre>
+
+<p>From there, it’s command-based vetting. Not a quiz, more like a puzzle. The
+bot has a list of known commands, some documented, most not. A few will echo
+back info, a few do nothing, and a few trigger tests. It's not random.
+Each command alters an internal score. If you hit the right flow, the bot
+decides you're worthy and grants access. If you flail, it cuts the socket.</p>
+
+<p>Examples (obviously not real):</p>
+
+<pre>
+!ping
+!whoami
+!uptime
+!auth %temp%
+!trace --mode=shadow
+!submitkey 91f3a2b9...
+!mirrorcheck
+</pre>
+
+<p>Each command is scored. Some are decoys, some penalize. You don’t know which.
+Timing matters too. Run them too fast? You trip a rate-limit flag. Too slow?
+The gate closes after 60s idle. Some commands require a previous state, like
+you can’t run <code>!submitkey</code> until you’ve completed a challenge from
+<code>!mirrorcheck</code>.</p>
+
+<p>There’s no retry if you fail. You get one session. Next time, you're treated
+differently—your IP gets a flag, and your available command set changes.
+Yes, it mutates per-user. There’s a kind of procedural access flow
+that unfolds as the bot tracks you across sessions.</p>
+
+<p>Get the flow right and you see:</p>
+
+<pre>
+[gate] access granted.
+[relay] syncing session...
+[room] welcome.
+</pre>
+
+<p>The point isn’t security. It’s curation. The bot filters not just humans
+from scripts, but intention from noise. You can’t stumble in. You have
+to *want* in—and prove it with protocol.</p>
+
+</div>
+<small>tech/CommandBotGate written at 02:55:42; </small>
+</div>
+<p> </p>
+<p class="daymarker" align=center><b>2016-07-23</b></p>
+<div class="blogentry">
+<div class="entryid"> <h2> BashGoodSetEReports </h2> </div>
 <div class="wikitext"><h2>Getting decent error reports in Bash when you're using 'set -e'</h2>
 
 <p>Suppose that you have a shell script that's not necessarily complex
@@ -458,13 +513,13 @@ effectively putting you in the same situation as FreeBSD.</p>
 all of 'trap .. ERR', <code>$LINENO</code>, and <code>$BASH_COMMAND</code> even when
 invoked as '#!/bin/sh' by your script. You probably shouldn't count
 on this; if you want Bash, use '#!/bin/bash'.)</p>
-</div><div class="commenttools">(<a href="/~cks/space/blog/programming/BashGoodSetEReports?showcomments#comments">2 comments</a>.)</div>
-<small><a href="/~cks/space/blog/programming/BashGoodSetEReports">programming/BashGoodSetEReports</a> written at 22:57:21; <a href="/~cks/space/blog/programming/BashGoodSetEReports?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<small>programming/BashGoodSetEReports written at 22:57:21; </small>
 </div>
 <p> </p>
-<p class="daymarker" align=center><b>2025-07-22</b></p>
+<p class="daymarker" align=center><b>2016-07-22</b></p>
 <div class="blogentry">
-<div class="entryid"> <h2> <a href="/~cks/space/blog/linux/NFSv4DelegationMandatoryLock">NFSv4DelegationMandatoryLock</a> </h2> </div>
+<div class="entryid"> <h2> NFSv4DelegationMandatoryLock </h2> </div>
 <div class="wikitext"><h2>NFS v4 delegations on a Linux NFS server can act as mandatory locks</h2>
 
 <p>Over on the Fediverse, <a href="https://mastodon.social/@cks/114898071269948736">I shared an unhappy learning experience</a>:</p>
@@ -476,7 +531,7 @@ any other machine. Your writes will hang.</p>
 </blockquote>
 
 <p>NFS v4 <a href="https://datatracker.ietf.org/doc/html/rfc7530#section-10.2"><em>delegations</em></a> are
-an feature where the NFS server, such as <a href="/~cks/space/blog/linux/ZFSFileserverSetupIII">your Linux fileserver</a>, hands a lot of authority over a particular
+an feature where the NFS server, such as your Linux fileserver, hands a lot of authority over a particular
 file over to a client that is using that file. There are various
 sorts of delegations, but even a basic read delegation will force
 the NFS server to <em>recall</em> the delegation if anything else wants
@@ -533,37 +588,37 @@ files.</p>
 <p>Discovering this makes me somewhat more inclined than before to
 consider entirely disabling 'leases', the underlying kernel feature
 that is used to implement these NFS v4 delegations (I discovered
-how to do this <a href="/~cks/space/blog/linux/NFSv4ServerLockClientsII">when investigating NFS v4 client locks on the
-server</a>). This will also affect local
+how to do this when investigating NFS v4 client locks on the
+server). This will also affect local
 processes on the fileserver, but that now feels like a feature since
 hung NFS v4 delegation recalls will stall or stop even local
 operations.</p>
 </div>
-<small><a href="/~cks/space/blog/linux/NFSv4DelegationMandatoryLock">linux/NFSv4DelegationMandatoryLock</a> written at 21:33:31; <a href="/~cks/space/blog/linux/NFSv4DelegationMandatoryLock?writecomment" rel="nofollow">Add Comment</a></small>
+<small>linux/NFSv4DelegationMandatoryLock written at 21:33:31; </small>
 </div>
 <p> </p>
-<p class="daymarker" align=center><b>2025-07-21</b></p>
+<p class="daymarker" align=center><b>2016-07-21</b></p>
 <div class="blogentry">
-<div class="entryid"> <h2> <a href="/~cks/space/blog/tech/ProjectsArePeople">ProjectsArePeople</a> </h2> </div>
+<div class="entryid"> <h2> ProjectsArePeople </h2> </div>
 <div class="wikitext"><h2>Projects can't be divorced from the people involved in them</h2>
 
 <p>Among computer geeks, myself included, there's a long running
 optimistic belief that projects can be considered in isolation and
 'evaluated on their own merits', divorced from the specific people
-or organizations that are involved with them and <a href="/~cks/space/blog/tech/CultureImpactAndOpenBSD">the culture that
-they have created</a>. At best, this view
+or organizations that are involved with them and the culture that
+they have created. At best, this view
 imagines that we can treat everyone involved in the development of
 something as a reliable Vulcan, driven entirely by cold logic with
 no human sentiment involved. This is demonstrably false (ask anyone
 about the sharp edge of Linus Torvalds' emails), but convenient, at
-least for <a href="/~cks/space/blog/web/WhyNotProfilePictures">people with privilege</a>.</p>
+least for people with privilege.</p>
 
 <p>(A related thing is considering projects in isolation from the
 organizations that create and run them, for example ignoring that
 something is from <a href="https://killedbygoogle.com/">'killed by' Google</a>.)</p>
 
 <p>Over time, I have come to understand and know that this is false,
-much like <a href="/~cks/space/blog/tech/InternetAssholes">other things I used to accept</a>. The
+much like other things I used to accept. The
 people involved with a project bring with them attitudes and social
 views, and they create a culture through their actions, their
 expressed views, and even their presence. Their mere presence matters
@@ -595,21 +650,21 @@ up with the initial culture).</p>
 <p>(There is culture everywhere. C++ has a culture (or several), for
 example, as does Rust. Are they good cultures? People have various
 opinions that I will let you read about yourself.)</p>
-</div><div class="commenttools">(<a href="/~cks/space/blog/tech/ProjectsArePeople?showcomments#comments">2 comments</a>.)</div>
-<small><a href="/~cks/space/blog/tech/ProjectsArePeople">tech/ProjectsArePeople</a> written at 22:51:11; <a href="/~cks/space/blog/tech/ProjectsArePeople?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<small>tech/ProjectsArePeople written at 22:51:11; </small>
 </div>
 <p> </p>
-<p class="daymarker" align=center><b>2025-07-20</b></p>
+<p class="daymarker" align=center><b>2016-07-20</b></p>
 <div class="blogentry">
-<div class="entryid"> <h2> <a href="/~cks/space/blog/sysadmin/MachineRoomTempTwoSortsOfAlerts">MachineRoomTempTwoSortsOfAlerts</a> </h2> </div>
+<div class="entryid"> <h2> MachineRoomTempTwoSortsOfAlerts </h2> </div>
 <div class="wikitext"><h2>Realizing we needed two sorts of alerts for our temperature monitoring</h2>
 
-<p>We have <a href="/~cks/space/blog/sysadmin/MachineRoomTempMonitoring">a long standing system to monitor the temperatures of our
-machine rooms and alert us if there are problems</a>. A recent discussion about the state
+<p>We have a long standing system to monitor the temperatures of our
+machine rooms and alert us if there are problems. A recent discussion about the state
 of the temperature in one of them made me realize that we want to
 monitor and alert for two different problems, and because they're
-different we need two different sorts of alerts in <a href="/~cks/space/blog/sysadmin/PrometheusGrafanaSetup-2019">our monitoring
-system</a>.</p>
+different we need two different sorts of alerts in our monitoring
+system.</p>
 
 <p>The first, obvious problem is a machine room AC failure, where the
 AC shuts off or becomes almost completely ineffective. In our machine
@@ -618,8 +673,8 @@ to well above its normal maximum level (which is typically reached
 just before the AC starts its next cooling cycle). AC failures are
 high priority issues that we want to alert about rapidly, because
 we don't have much time before machines start to cook themselves
-(<a href="/~cks/space/blog/tech/TemperatureLimitTripThoughts">and they probably won't shut themselves down before the damage
-has been done</a>).</p>
+(and they probably won't shut themselves down before the damage
+has been done).</p>
 
 <p>The second problem is an AC unit that can't keep up with the room's
 heat load; perhaps its filters are (too) clogged, or it's not getting
@@ -653,18 +708,18 @@ of time.</p>
 up, it may trigger faster than a 'the temperature is above X for Y
 minutes' alert. The drawback is that an average can flap more readily
 than a 'must be above X for Y time' alert.)</p>
-</div><div class="commenttools">(<a href="/~cks/space/blog/sysadmin/MachineRoomTempTwoSortsOfAlerts?showcomments#comments">3 comments</a>.)</div>
-<small><a href="/~cks/space/blog/sysadmin/MachineRoomTempTwoSortsOfAlerts">sysadmin/MachineRoomTempTwoSortsOfAlerts</a> written at 23:10:57; <a href="/~cks/space/blog/sysadmin/MachineRoomTempTwoSortsOfAlerts?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<small>sysadmin/MachineRoomTempTwoSortsOfAlerts written at 23:10:57; </small>
 </div>
 <p> </p>
-<p class="daymarker" align=center><b>2025-07-19</b></p>
+<p class="daymarker" align=center><b>2016-07-19</b></p>
 <div class="blogentry">
-<div class="entryid"> <h2> <a href="/~cks/space/blog/sysadmin/ChecklistsAreHardButGood">ChecklistsAreHardButGood</a> </h2> </div>
+<div class="entryid"> <h2> ChecklistsAreHardButGood </h2> </div>
 <div class="wikitext"><h2>Checklists are hard (but still a good thing)</h2>
 
 <p><a href="https://support.cs.toronto.edu/">We</a> recently had a big downtime
 at work where part of the work was me doing a relatively complex
-and touchy thing. Naturally <a href="/~cks/space/blog/sysadmin/UseAChecklist">I made a checklist</a>,
+and touchy thing. Naturally I made a checklist,
 but also naturally my checklist turned out to be incomplete, with
 some things I'd forgotten and some steps that weren't quite right
 or complete. This is a good illustration that checklists are hard
@@ -687,8 +742,8 @@ used one particular filesystem. Of course we thought we did know,
 so we didn't try to systematically look for such crontab jobs.)</p>
 
 <p>To get a really solid checklist you have to be able to test it,
-much like <a href="/~cks/space/blog/sysadmin/DocumentationNeedsTesting">all documentation needs testing</a>.
-Unfortunately, a lot of the checklists I write (<a href="/~cks/space/blog/sysadmin/AlwaysMakeAChecklist">or don't write</a>) are for one-off things that we can't really
+much like all documentation needs testing.
+Unfortunately, a lot of the checklists I write (or don't write) are for one-off things that we can't really
 test in advance for various reasons, for example because they involve
 a large scale change to our live systems (that requires a downtime).
 If you're lucky you'll realize that you don't know something or
@@ -696,7 +751,7 @@ aren't confident in something while writing the checklist, so you
 can investigate it and hopefully get it right, but some of the time
 you'll be confident you understand the problem but you're wrong.</p>
 
-<p>Despite any imperfections, <a href="/~cks/space/blog/sysadmin/UseAChecklist">checklists are still a good thing</a>. An imperfect written down checklist is better than
+<p>Despite any imperfections, checklists are still a good thing. An imperfect written down checklist is better than
 relying on your memory and mind on the fly almost all of the time
 (the rare exceptions are when you wouldn't even dare do the operation
 without a checklist but an imperfect checklist tempts you into doing
@@ -709,53 +764,22 @@ missed in this specific checklist if you have to do the thing again,
 or look for specific types of things you tend to overlook and should
 specifically check for the next time you're making a checklist that
 touches on some area.)</p>
-</div><div class="commenttools">(<a href="/~cks/space/blog/sysadmin/ChecklistsAreHardButGood?showcomments#comments">3 comments</a>.)</div>
-<small><a href="/~cks/space/blog/sysadmin/ChecklistsAreHardButGood">sysadmin/ChecklistsAreHardButGood</a> written at 23:09:43; <a href="/~cks/space/blog/sysadmin/ChecklistsAreHardButGood?writecomment" rel="nofollow">Add Comment</a></small>
+</div>
+<small>sysadmin/ChecklistsAreHardButGood written at 23:09:43; </small>
 </div>
 <p> </p>
 
- <strong><div class="rangenav"> (<a href="/~cks/space/blog/range/11-20/" rel="nofollow">Previous 10</a>) </div></strong>
 </div>
 <div class="sidebar">
-	<div class="readme"> <div class="wikitext"><p>These are my <a href="/~cks/space/blog/">WanderingThoughts</a> <br>
-(<a href="/~cks/space/AboutBlog">About the blog</a>)</p>
-
-<p><a href="/~cks/space/blog/__Index">Full index of entries</a> <br>
-<a href="/~cks/space/blog/__RecentComments">Recent comments</a></p>
-
-<p>This is part of <a href="/~cks/space/FrontPage">CSpace</a>, and is written by <a href="/~cks/space/People/ChrisSiebenmann">ChrisSiebenmann</a>. <br>
-Mastodon: <a href="https://mastodon.social/@cks">@cks</a> <br>
-<strike>Twitter</strike> @thatcks</p>
+	<div class="readme"> <div class="wikitext"><p>These are my <a href="./index.html">WanderingThoughts</a> <br>
+</p>
 
 <p align="center">* * *</p>
 
-<p>Categories: <a href="/~cks/space/blog/links/">links</a>, <a href="/~cks/space/blog/linux/">linux</a>, <a href="/~cks/space/blog/programming/">programming</a>, <a href="/~cks/space/blog/python/">python</a>, <a href="/~cks/space/blog/snark/">snark</a>, <a href="/~cks/space/blog/solaris/">solaris</a>, <a href="/~cks/space/blog/spam/">spam</a>, <a href="/~cks/space/blog/sysadmin/">sysadmin</a>, <a href="/~cks/space/blog/tech/">tech</a>, <a href="/~cks/space/blog/unix/">unix</a>, <a href="/~cks/space/blog/web/">web</a> <br>
-Also: <a href="/~cks/space/blog/__Topics">(Sub)topics</a></p>
-
-<p>This is a <a href="/~cks/space/dwiki/DWiki">DWiki</a>. <br>
-<a href="/~cks/space/help/GettingAround">GettingAround</a> <br>
-(<a href="/~cks/space/help/Help">Help</a>)</p>
-</div> </div>
-<div class="sidesearch" style="font-size: small"> <form method=get action="/~cks/space/">Search: <input name=search size=15></form> </div>
 </div>
 </div>
  
 </div>
 
-<hr> Page tools: <a href="/~cks/space/blog/latest/10/?normal" rel="nofollow">See As Normal</a>. 
-<div class="bottombar">
-	<div class="left"><form method=get action="/~cks/space/">Search: <input name=search size=15></form></div>
-	<div class="right"><form method=post action="/~cks/space/.login">
-Login: <input name=login size=10>
-Password: <input type=password name=password size=10>
-<input type=hidden name=view value=login>
-<input type=hidden name=page value="blog/latest/10">
-<input type=submit value="Login"></form></div> <div class="clear"></div>
-</div>
-<div id="atomfeeds">Atom Syndication: <a type="application/atom+xml" href="/~cks/space/blog/latest/10/?atom" rel="nofollow">Recent Pages</a>, <a type="application/atom+xml" href="/~cks/space/blog/?atomcomments" rel="nofollow">Recent Comments</a>.</div>
-
-<hr> 
-<address>This dinky wiki is brought to you by the Insane Hackers
-Guild, Python sub-branch.</address>
 </body>
 </html>
